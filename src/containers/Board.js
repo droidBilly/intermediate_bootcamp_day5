@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import Square from '../components/Square'
 import './Board.css'
 
+// Somewhere at the top, import connect:
+import { connect } from 'react-redux'
+
 export class Board extends PureComponent {
   static propTypes = {
     board: PropTypes.arrayOf(
@@ -33,4 +36,13 @@ export class Board extends PureComponent {
   }
 }
 
-export default Board
+const mapStateToProps = (reduxState) => {
+  // return an object with the prop names (keys) and prop values
+  // taken from the reduxState (values)
+  return {
+    board: reduxState.board
+  }
+}
+
+// Then pass it to connect:
+export default connect(mapStateToProps)(Board)
