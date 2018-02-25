@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Board from './containers/Board'
 import CreateGameButton from './components/CreateGameButton'
+import Progress from './components/Progress'
+import Finished from './components/Finished'
+
 
 class App extends Component {
   render() {
@@ -12,7 +15,9 @@ class App extends Component {
         <div className="actions">
           <CreateGameButton />
         </div>
+        <Progress />
         <Board />
+        <Finished />
       </div>
     )
   }

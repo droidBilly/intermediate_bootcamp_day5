@@ -1,19 +1,34 @@
-import { CREATE_GAME } from '../actions/types'
+import { CREATE_GAME, MOVE } from '../actions/types'
 
-// export default function(state = [], action = {}) {
-//   switch(action.type) {
-//     case 'NEW_GAME' :
-//       return [].concat(action.payload)
-export default (state = [], { type, payload } = {}) => {
+const emptyBoard = [
+  [ 0,0,0,0,0,0 ],
+  [ 0,0,0,0,0,0 ],
+  [ 0,0,0,0,0,0 ],
+  [ 0,0,0,0,0,0 ],
+  [ 0,0,0,0,0,0 ],
+  [ 0,0,0,0,0,0 ]
+]
+
+export default (state = emptyBoard, { type, payload } = {}) => {
   switch (type) {
     case CREATE_GAME :
       return [].concat(payload.board)
+    case MOVE :
+    return state
+      .map((row, rowIndex) => {
+        if (rowIndex !== payload.row) return row
+
+        return row.map((value, colIndex) => {
+          if (colIndex !== payload.col) return value
+
+          switch (value) {
+            case 0: return 1
+            case 1: return 2
+            default: return 0
+          }
+        })
+      })
     default :
-      let board = new Array(6)
-      for (let i = 0; i < 6; i++)
-      {
-        board[i] = new Array(6).fill(0,0,6)
-      }
-      return state = board
+      return state
   }
 }
